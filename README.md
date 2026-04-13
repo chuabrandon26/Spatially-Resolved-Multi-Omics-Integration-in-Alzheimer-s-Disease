@@ -4,7 +4,7 @@
 > *This project is currently on hold. Due to the massive computational requirements of processing ~45,000 spatial spots, running this `Cell2location` pipeline requires High-Performance Computing (HPC) cluster resources. Active development is paused as it takes too long to execute on local laptop hardware, and I am currently prioritizing and focusing full-time on my Master's thesis. The codebase below represents the fully structured, memory-optimized pipeline ready for cluster deployment.*
 
 **Overview:**  
-This project implements a computational pipeline to map astrocyte and microglia states to Alzheimer's amyloid pathology. Using `Cell2location`, it integrates single-cell and spatial transcriptomics to deconvolute the spatial distribution of glial cells—specifically those driven by the APOE-activating enhancer RNA, AANCR—enabling high-accuracy detection of rare neuroinflammatory states across cortical tissue.
+This project implements a computational pipeline to map astrocyte and microglia states to Alzheimer's amyloid pathology. Using `Cell2location`, it integrates single-cell and spatial transcriptomics to deconvolute the spatial distribution of glial cells—specifically those driven by the APOE-activating enhancer RNA, AANCR, enabling high-accuracy detection of rare neuroinflammatory states across cortical tissue.
 
 ---
 
@@ -184,7 +184,7 @@ print("🎉 Cell2location Spatial Mapping COMPLETE!")
 ---
 
 ## Hardware Requirements
-Running the full `Cell2location` script on the SEA-AD spatial data (`~45,000 spots`) requires a machine with at least **32GB of RAM** and a dedicated **NVIDIA GPU** for CUDA-accelerated processing. Running this script strictly on a CPU or standard laptop may result in Out-Of-Memory (OOM) kernel crashes.
+Running the full `Cell2location` script on the SEA-AD spatial data (`~45,000 spots`) requires a machine with  **Strong RAM** and the use of a **GPU** for CUDA-accelerated processing. Running this script strictly on a CPU or standard laptop may result in Out-Of-Memory (OOM) kernel crashes.
 
 ---
 
