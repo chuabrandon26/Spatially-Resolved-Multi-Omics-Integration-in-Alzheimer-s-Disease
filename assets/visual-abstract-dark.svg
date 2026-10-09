@@ -1,0 +1,549 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 752" width="1000" height="752" role="img" aria-labelledby="t d">
+<title id="t">Visual abstract: Mapping reactive glia to amyloid in Alzheimer's</title>
+<desc id="d">Cell2location maps 12 glial state signatures onto 45,055 SEA-AD MERFISH spots from the human middle temporal gyrus. Inflammation-high spots (top 25 percent of reactive glia abundance) sit slightly closer to amyloid (Mann-Whitney p = 9.8e-5, rank-biserial 0.023), while the tissue-wide Spearman correlation is negligible (rho = -0.013).</desc>
+<style>
+  text { font-family: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif; fill: #e6edf3; }
+  .bgcard { fill: #151b23; stroke: #2d3640; }
+  .panel { fill: #0d1117; stroke: #2d3640; stroke-width: 1; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; fill: #9aa7b4; }
+  .title { font-size: 26px; font-weight: 700; letter-spacing: -0.3px; }
+  .sub { font-size: 14px; fill: #9aa7b4; }
+  .h2 { font-size: 16px; font-weight: 700; }
+  .body { font-size: 12.5px; }
+  .small { font-size: 11px; fill: #9aa7b4; }
+  .lab { font-size: 12px; font-weight: 700; }
+  .num { font-size: 23px; font-weight: 700; }
+  .q { font-size: 12.5px; font-weight: 700; }
+  .take { font-size: 15px; }
+  .em { font-weight: 700; }
+  .step-role { font-size: 13px; font-weight: 700; }
+  .step-tool { font-size: 11px; }
+  .step-n { font-size: 10px; font-weight: 700; fill: #9aa7b4; }
+  .chiptext { font-size: 11.5px; font-weight: 600; }
+  .skill { fill: #0d1117; stroke: #2d3640; stroke-width: 1.2; }
+  .rule { stroke: #2d3640; stroke-width: 1; fill: none; }
+  .qbox { fill: #1c2033; }
+  .qmark { fill: #9085e9; }
+  .qmark-t { font-size: 13px; font-weight: 700; fill: #0d1117; }
+  .chev { fill: none; stroke: #9aa7b4; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .chip { fill: #0d1117; stroke: #2d3640; stroke-width: 1.2; animation: glow 8.4s linear infinite; }
+  .track { stroke: #2d3640; stroke-width: 2; stroke-linecap: round; }
+  .packet { fill: #34b98b; animation: travel 8.4s linear infinite; }
+  .tile { stroke-width: 1.5; }
+  .tile.up { fill: #e66767; fill-opacity: .14; stroke: #e66767; }
+  .tile.down { fill: #3987e5; fill-opacity: .14; stroke: #3987e5; }
+  .tile.metric { fill: #34b98b; fill-opacity: .12; stroke: #34b98b; }
+  .tile.note { fill: #9085e9; fill-opacity: .10; stroke: #9085e9; }
+  .tval { font-size: 15px; font-weight: 700; }
+  .tsub { font-size: 10px; fill: #9aa7b4; }
+  .tri-up { fill: #e66767; transform-box: fill-box; transform-origin: center; animation: bobUp 2.6s ease-in-out infinite; }
+  .tri-down { fill: #3987e5; transform-box: fill-box; transform-origin: center; animation: bobDown 2.6s ease-in-out infinite; }
+  .check { fill: none; stroke: #34b98b; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  .statbox { fill: #1f2731; }
+  /* motif classes */
+  .m-lab { font-size: 11px; fill: #9aa7b4; }
+  .m-lab.bold { font-weight: 700; fill: #e6edf3; }
+  .m-lab.small { font-size: 9.5px; }
+  .m-lab.inv { fill: #0d1117; font-weight: 700; }
+  .m-strand { fill: none; stroke-width: 2.6; stroke-linecap: round; }
+  .m-strand.a { stroke: #9085e9; }
+  .m-strand.b { stroke: #34b98b; }
+  .m-rung { stroke: #2d3640; stroke-width: 2; }
+  .m-rung.hit { stroke: #d55181; stroke-width: 3; }
+  .m-hitdot, .m-ring, .m-dot.hom, .m-cell.hom { transform-box: fill-box; transform-origin: center; }
+  .m-hitdot { fill: #d55181; animation: pulse 3s ease-in-out infinite; }
+  .m-dot { fill-opacity: .85; }
+  .cx { fill: #9085e9; } .acc { fill: #34b98b; } .cb { fill: #c98500; } .hom { fill: #d55181; }
+  .ink { fill: #e6edf3; }
+  .m-peak { fill-opacity: .7; stroke: none; }
+  .m-base { stroke: #2d3640; stroke-width: 1.2; }
+  .m-gene { stroke: #9aa7b4; stroke-width: 1.4; }
+  .m-exon { fill: #9aa7b4; }
+  .m-tissue { fill: #1f2731; stroke: #9aa7b4; stroke-width: 1.2; }
+  .m-tissue.fillonly { stroke: none; }
+  .m-tissue.outline { fill: none; stroke-width: 1.6; }
+  .m-ring { fill: none; stroke: #e6edf3; stroke-width: 2; stroke-dasharray: 3 2; animation: pulse 3.2s ease-in-out infinite; }
+  .m-cell { stroke: #0d1117; stroke-width: 1.2; }
+  .m-radius { fill: #34b98b; fill-opacity: .08; stroke: #34b98b; stroke-width: 1.6; stroke-dasharray: 4 3; }
+  .m-center { fill: #e6edf3; }
+  .m-cellf { stroke: none; }
+  .m-op { font-size: 18px; font-weight: 700; fill: #9aa7b4; }
+  .m-edge { stroke: #2d3640; stroke-width: .8; }
+  .m-edge.strong { stroke: #9aa7b4; stroke-width: 1.4; }
+  .m-node { fill: #0d1117; stroke: #9085e9; stroke-width: 2; }
+  .m-node.in { stroke: #9aa7b4; }
+  .m-node.z { fill: #34b98b; stroke: #34b98b; }
+  .m-base-t { font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace; font-size: 15px; font-weight: 700; }
+  .m-base-t.acc { fill: #34b98b; } .m-base-t.cx { fill: #9085e9; } .m-base-t.cb { fill: #c98500; } .m-base-t.hom { fill: #d55181; }
+  .m-window { fill: #34b98b; fill-opacity: .10; stroke: #34b98b; stroke-width: 2; animation: scan 4s ease-in-out infinite; }
+  .m-bar { fill: #9085e9; fill-opacity: .75; }
+  .m-arrow { stroke: #9aa7b4; stroke-width: 1.4; fill: none; }
+  .m-table { fill: #0d1117; stroke: #9aa7b4; stroke-width: 1.2; }
+  .m-thead { fill: #9085e9; }
+  .m-row { stroke: #2d3640; stroke-width: 1.4; }
+  .m-cyl { fill: #1f2731; stroke: #34b98b; stroke-width: 1.6; }
+  .m-cyl.top { fill: #0d1117; }
+  .m-bond { stroke: #9aa7b4; stroke-width: 3; stroke-linecap: round; }
+  .m-atom { fill: #9aa7b4; stroke: #0d1117; stroke-width: 1.4; }
+  .m-atom.pep { animation: drift 4s ease-in-out infinite; }
+  .m-head { fill: #c98500; }
+  .m-tail { fill: none; stroke: #2d3640; stroke-width: 1.4; }
+  .m-stick { stroke: #9aa7b4; stroke-width: 2; }
+  .m-stick.ghost { stroke: #2d3640; stroke-dasharray: 3 2; }
+  .m-stick.hit { stroke: #d55181; stroke-width: 3; }
+  .m-ecg { fill: none; stroke: #d55181; stroke-width: 2.2; stroke-linejoin: round; stroke-dasharray: 900; animation: ecg 3.4s linear infinite; }
+  .m-gauge { fill: none; stroke-width: 9; }
+  .m-gauge.acc { stroke: #34b98b; } .m-gauge.cb { stroke: #c98500; } .m-gauge.hom { stroke: #d55181; }
+  .m-needle { stroke: #e6edf3; stroke-width: 2.6; stroke-linecap: round; }
+  @keyframes pulse { 0%, 100% { opacity: .5; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.15); } }
+  @keyframes bobUp { 0%, 100% { transform: translateY(1.5px); } 50% { transform: translateY(-1.5px); } }
+  @keyframes bobDown { 0%, 100% { transform: translateY(-1.5px); } 50% { transform: translateY(1.5px); } }
+  @keyframes travel { 0% { transform: translateX(0); opacity: 0; } 3% { opacity: 1; } 97% { opacity: 1; } 100% { transform: translateX(776.6px); opacity: 0; } }
+  @keyframes glow { 0%, 14.3%, 100% { stroke: #2d3640; stroke-width: 1.2; } 3%, 8.9% { stroke: #34b98b; stroke-width: 2.2; } }
+  @keyframes scan { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+  @keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  @keyframes ecg { 0% { stroke-dashoffset: 900; } 100% { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+<rect x="0.5" y="0.5" width="999" height="751" rx="18" class="bgcard"/>
+<text x="36.0" y="44.0" class="eyebrow">VISUAL ABSTRACT  ·  SPATIAL TRANSCRIPTOMICS  ·  CELL2LOCATION  ·  ALZHEIMER'S DISEASE</text>
+<text x="36.0" y="79.0" class="title">Mapping reactive glia to amyloid in Alzheimer's</text>
+<text x="36.0" y="106.0" class="sub">Cell2location deconvolution of SEA-AD MERFISH middle temporal gyrus, guided by an APOE-linked AANCR signal</text>
+<rect x="36" y="128" width="296" height="368" rx="12" class="panel"/><text x="52.0" y="154.0" class="eyebrow">QUESTION</text><text x="52.0" y="176.0" class="h2">Do reactive glia track amyloid?</text>
+<defs><clipPath id="tissueclip"><path d="M72,264 C62,214 142,190 202,204 C282,216 320,264 292,306 C266,334 122,336 88,312 C74,300 76,282 72,264 Z"/></clipPath></defs>
+<path class="m-tissue fillonly" d="M72,264 C62,214 142,190 202,204 C282,216 320,264 292,306 C266,334 122,336 88,312 C74,300 76,282 72,264 Z"/>
+<g clip-path="url(#tissueclip)">
+<circle cx="62.0" cy="196.0" r="4.1" class="m-dot cx"/>
+<circle cx="73.5" cy="196.0" r="4.1" class="m-dot cx"/>
+<circle cx="85.0" cy="196.0" r="4.1" class="m-dot cx"/>
+<circle cx="96.5" cy="196.0" r="4.1" class="m-dot cx"/>
+<circle cx="108.0" cy="196.0" r="4.1" class="m-dot cx"/>
+<circle cx="119.5" cy="196.0" r="4.1" class="m-dot cx"/>
+<circle cx="131.0" cy="196.0" r="4.1" class="m-dot cx"/>
+<circle cx="142.5" cy="196.0" r="4.1" class="m-dot cx"/>
+<circle cx="154.0" cy="196.0" r="4.1" class="m-dot acc"/>
+<circle cx="165.5" cy="196.0" r="4.1" class="m-dot acc"/>
+<circle cx="177.0" cy="196.0" r="4.1" class="m-dot acc"/>
+<circle cx="188.5" cy="196.0" r="4.1" class="m-dot acc"/>
+<circle cx="200.0" cy="196.0" r="4.1" class="m-dot acc"/>
+<circle cx="211.5" cy="196.0" r="4.1" class="m-dot acc"/>
+<circle cx="223.0" cy="196.0" r="4.1" class="m-dot acc"/>
+<circle cx="234.5" cy="196.0" r="4.1" class="m-dot acc"/>
+<circle cx="246.0" cy="196.0" r="4.1" class="m-dot cb"/>
+<circle cx="257.5" cy="196.0" r="4.1" class="m-dot cb"/>
+<circle cx="269.0" cy="196.0" r="4.1" class="m-dot cb"/>
+<circle cx="280.5" cy="196.0" r="4.1" class="m-dot cb"/>
+<circle cx="292.0" cy="196.0" r="4.1" class="m-dot cb"/>
+<circle cx="303.5" cy="196.0" r="4.1" class="m-dot cb"/>
+<circle cx="315.0" cy="196.0" r="4.1" class="m-dot cb"/>
+<circle cx="326.5" cy="196.0" r="4.1" class="m-dot cb"/>
+<circle cx="67.7" cy="207.5" r="4.1" class="m-dot cx"/>
+<circle cx="79.2" cy="207.5" r="4.1" class="m-dot cx"/>
+<circle cx="90.7" cy="207.5" r="4.1" class="m-dot cx"/>
+<circle cx="102.2" cy="207.5" r="4.1" class="m-dot cx"/>
+<circle cx="113.7" cy="207.5" r="4.1" class="m-dot acc"/>
+<circle cx="125.2" cy="207.5" r="4.1" class="m-dot acc"/>
+<circle cx="136.7" cy="207.5" r="4.1" class="m-dot acc"/>
+<circle cx="148.2" cy="207.5" r="4.1" class="m-dot acc"/>
+<circle cx="159.7" cy="207.5" r="4.1" class="m-dot acc"/>
+<circle cx="171.2" cy="207.5" r="4.1" class="m-dot acc"/>
+<circle cx="182.7" cy="207.5" r="4.1" class="m-dot acc"/>
+<circle cx="194.2" cy="207.5" r="4.1" class="m-dot acc"/>
+<circle cx="205.7" cy="207.5" r="4.1" class="m-dot acc"/>
+<circle cx="217.2" cy="207.5" r="4.1" class="m-dot cb"/>
+<circle cx="228.7" cy="207.5" r="4.1" class="m-dot cb"/>
+<circle cx="240.2" cy="207.5" r="4.1" class="m-dot cb"/>
+<circle cx="251.7" cy="207.5" r="4.1" class="m-dot cb"/>
+<circle cx="263.2" cy="207.5" r="4.1" class="m-dot cb"/>
+<circle cx="274.7" cy="207.5" r="4.1" class="m-dot cb"/>
+<circle cx="286.2" cy="207.5" r="4.1" class="m-dot cb"/>
+<circle cx="297.7" cy="207.5" r="4.1" class="m-dot cb"/>
+<circle cx="309.2" cy="207.5" r="4.1" class="m-dot hom"/>
+<circle cx="320.7" cy="207.5" r="4.1" class="m-dot hom"/>
+<circle cx="332.2" cy="207.5" r="4.1" class="m-dot hom"/>
+<circle cx="62.0" cy="219.0" r="4.1" class="m-dot cx"/>
+<circle cx="73.5" cy="219.0" r="4.1" class="m-dot cx"/>
+<circle cx="85.0" cy="219.0" r="4.1" class="m-dot acc"/>
+<circle cx="96.5" cy="219.0" r="4.1" class="m-dot acc"/>
+<circle cx="108.0" cy="219.0" r="4.1" class="m-dot acc"/>
+<circle cx="119.5" cy="219.0" r="4.1" class="m-dot acc"/>
+<circle cx="131.0" cy="219.0" r="4.1" class="m-dot acc"/>
+<circle cx="142.5" cy="219.0" r="4.1" class="m-dot acc"/>
+<circle cx="154.0" cy="219.0" r="4.1" class="m-dot acc"/>
+<circle cx="165.5" cy="219.0" r="4.1" class="m-dot acc"/>
+<circle cx="177.0" cy="219.0" r="4.1" class="m-dot cb"/>
+<circle cx="188.5" cy="219.0" r="4.1" class="m-dot cb"/>
+<circle cx="200.0" cy="219.0" r="4.1" class="m-dot cb"/>
+<circle cx="211.5" cy="219.0" r="4.1" class="m-dot cb"/>
+<circle cx="223.0" cy="219.0" r="4.1" class="m-dot cb"/>
+<circle cx="234.5" cy="219.0" r="4.1" class="m-dot cb"/>
+<circle cx="246.0" cy="219.0" r="4.1" class="m-dot cb"/>
+<circle cx="257.5" cy="219.0" r="4.1" class="m-dot cb"/>
+<circle cx="269.0" cy="219.0" r="4.1" class="m-dot cb"/>
+<circle cx="280.5" cy="219.0" r="4.1" class="m-dot hom"/>
+<circle cx="292.0" cy="219.0" r="4.1" class="m-dot hom"/>
+<circle cx="303.5" cy="219.0" r="4.1" class="m-dot hom"/>
+<circle cx="315.0" cy="219.0" r="4.1" class="m-dot hom"/>
+<circle cx="326.5" cy="219.0" r="4.1" class="m-dot hom"/>
+<circle cx="67.7" cy="230.5" r="4.1" class="m-dot acc"/>
+<circle cx="79.2" cy="230.5" r="4.1" class="m-dot acc"/>
+<circle cx="90.7" cy="230.5" r="4.1" class="m-dot acc"/>
+<circle cx="102.2" cy="230.5" r="4.1" class="m-dot acc"/>
+<circle cx="113.7" cy="230.5" r="4.1" class="m-dot acc"/>
+<circle cx="125.2" cy="230.5" r="4.1" class="m-dot acc"/>
+<circle cx="136.7" cy="230.5" r="4.1" class="m-dot acc"/>
+<circle cx="148.2" cy="230.5" r="4.1" class="m-dot cb"/>
+<circle cx="159.7" cy="230.5" r="4.1" class="m-dot cb"/>
+<circle cx="171.2" cy="230.5" r="4.1" class="m-dot cb"/>
+<circle cx="182.7" cy="230.5" r="4.1" class="m-dot cb"/>
+<circle cx="194.2" cy="230.5" r="4.1" class="m-dot cb"/>
+<circle cx="205.7" cy="230.5" r="4.1" class="m-dot cb"/>
+<circle cx="217.2" cy="230.5" r="4.1" class="m-dot cb"/>
+<circle cx="228.7" cy="230.5" r="4.1" class="m-dot cb"/>
+<circle cx="240.2" cy="230.5" r="4.1" class="m-dot hom"/>
+<circle cx="251.7" cy="230.5" r="4.1" class="m-dot hom"/>
+<circle cx="263.2" cy="230.5" r="4.1" class="m-dot hom"/>
+<circle cx="274.7" cy="230.5" r="4.1" class="m-dot hom"/>
+<circle cx="286.2" cy="230.5" r="4.1" class="m-dot hom"/>
+<circle cx="297.7" cy="230.5" r="4.1" class="m-dot hom"/>
+<circle cx="309.2" cy="230.5" r="4.1" class="m-dot hom"/>
+<circle cx="320.7" cy="230.5" r="4.1" class="m-dot hom"/>
+<circle cx="332.2" cy="230.5" r="4.1" class="m-dot hom"/>
+<circle cx="62.0" cy="242.0" r="4.1" class="m-dot acc"/>
+<circle cx="73.5" cy="242.0" r="4.1" class="m-dot acc"/>
+<circle cx="85.0" cy="242.0" r="4.1" class="m-dot acc"/>
+<circle cx="96.5" cy="242.0" r="4.1" class="m-dot acc"/>
+<circle cx="108.0" cy="242.0" r="4.1" class="m-dot acc"/>
+<circle cx="119.5" cy="242.0" r="4.1" class="m-dot cb"/>
+<circle cx="131.0" cy="242.0" r="4.1" class="m-dot cb"/>
+<circle cx="142.5" cy="242.0" r="4.1" class="m-dot cb"/>
+<circle cx="154.0" cy="242.0" r="4.1" class="m-dot cb"/>
+<circle cx="165.5" cy="242.0" r="4.1" class="m-dot cb"/>
+<circle cx="177.0" cy="242.0" r="4.1" class="m-dot cb"/>
+<circle cx="188.5" cy="242.0" r="4.1" class="m-dot cb"/>
+<circle cx="200.0" cy="242.0" r="4.1" class="m-dot cb"/>
+<circle cx="211.5" cy="242.0" r="4.1" class="m-dot hom"/>
+<circle cx="223.0" cy="242.0" r="4.1" class="m-dot hom"/>
+<circle cx="234.5" cy="242.0" r="4.1" class="m-dot hom"/>
+<circle cx="246.0" cy="242.0" r="4.1" class="m-dot hom"/>
+<circle cx="257.5" cy="242.0" r="4.1" class="m-dot hom"/>
+<circle cx="269.0" cy="242.0" r="4.1" class="m-dot hom"/>
+<circle cx="280.5" cy="242.0" r="4.1" class="m-dot hom"/>
+<circle cx="292.0" cy="242.0" r="4.1" class="m-dot hom"/>
+<circle cx="303.5" cy="242.0" r="4.1" class="m-dot cx"/>
+<circle cx="315.0" cy="242.0" r="4.1" class="m-dot cx"/>
+<circle cx="326.5" cy="242.0" r="4.1" class="m-dot cx"/>
+<circle cx="67.7" cy="253.5" r="4.1" class="m-dot acc"/>
+<circle cx="79.2" cy="253.5" r="4.1" class="m-dot cb"/>
+<circle cx="90.7" cy="253.5" r="4.1" class="m-dot cb"/>
+<circle cx="102.2" cy="253.5" r="4.1" class="m-dot cb"/>
+<circle cx="113.7" cy="253.5" r="4.1" class="m-dot cb"/>
+<circle cx="125.2" cy="253.5" r="4.1" class="m-dot cb"/>
+<circle cx="136.7" cy="253.5" r="4.1" class="m-dot cb"/>
+<circle cx="148.2" cy="253.5" r="4.1" class="m-dot cb"/>
+<circle cx="159.7" cy="253.5" r="4.1" class="m-dot cb"/>
+<circle cx="171.2" cy="253.5" r="4.1" class="m-dot cb"/>
+<circle cx="182.7" cy="253.5" r="4.1" class="m-dot hom"/>
+<circle cx="194.2" cy="253.5" r="4.1" class="m-dot hom"/>
+<circle cx="205.7" cy="253.5" r="4.1" class="m-dot hom"/>
+<circle cx="217.2" cy="253.5" r="4.1" class="m-dot hom"/>
+<circle cx="228.7" cy="253.5" r="4.1" class="m-dot hom"/>
+<circle cx="240.2" cy="253.5" r="4.1" class="m-dot hom"/>
+<circle cx="251.7" cy="253.5" r="4.1" class="m-dot hom"/>
+<circle cx="263.2" cy="253.5" r="4.1" class="m-dot hom"/>
+<circle cx="274.7" cy="253.5" r="4.1" class="m-dot cx"/>
+<circle cx="286.2" cy="253.5" r="4.1" class="m-dot cx"/>
+<circle cx="297.7" cy="253.5" r="4.1" class="m-dot cx"/>
+<circle cx="309.2" cy="253.5" r="4.1" class="m-dot cx"/>
+<circle cx="320.7" cy="253.5" r="4.1" class="m-dot cx"/>
+<circle cx="332.2" cy="253.5" r="4.1" class="m-dot cx"/>
+<circle cx="62.0" cy="265.0" r="4.1" class="m-dot cb"/>
+<circle cx="73.5" cy="265.0" r="4.1" class="m-dot cb"/>
+<circle cx="85.0" cy="265.0" r="4.1" class="m-dot cb"/>
+<circle cx="96.5" cy="265.0" r="4.1" class="m-dot cb"/>
+<circle cx="108.0" cy="265.0" r="4.1" class="m-dot cb"/>
+<circle cx="119.5" cy="265.0" r="4.1" class="m-dot cb"/>
+<circle cx="131.0" cy="265.0" r="4.1" class="m-dot cb"/>
+<circle cx="142.5" cy="265.0" r="4.1" class="m-dot hom"/>
+<circle cx="154.0" cy="265.0" r="4.1" class="m-dot hom"/>
+<circle cx="165.5" cy="265.0" r="4.1" class="m-dot hom"/>
+<circle cx="177.0" cy="265.0" r="4.1" class="m-dot hom"/>
+<circle cx="188.5" cy="265.0" r="4.1" class="m-dot hom"/>
+<circle cx="200.0" cy="265.0" r="4.1" class="m-dot hom"/>
+<circle cx="211.5" cy="265.0" r="4.1" class="m-dot hom"/>
+<circle cx="223.0" cy="265.0" r="4.1" class="m-dot hom"/>
+<circle cx="234.5" cy="265.0" r="4.1" class="m-dot hom"/>
+<circle cx="246.0" cy="265.0" r="4.1" class="m-dot cx"/>
+<circle cx="257.5" cy="265.0" r="4.1" class="m-dot cx"/>
+<circle cx="269.0" cy="265.0" r="4.1" class="m-dot cx"/>
+<circle cx="280.5" cy="265.0" r="4.1" class="m-dot cx"/>
+<circle cx="292.0" cy="265.0" r="4.1" class="m-dot cx"/>
+<circle cx="303.5" cy="265.0" r="4.1" class="m-dot cx"/>
+<circle cx="315.0" cy="265.0" r="4.1" class="m-dot cx"/>
+<circle cx="326.5" cy="265.0" r="4.1" class="m-dot cx"/>
+<circle cx="67.7" cy="276.5" r="4.1" class="m-dot cb"/>
+<circle cx="79.2" cy="276.5" r="4.1" class="m-dot cb"/>
+<circle cx="90.7" cy="276.5" r="4.1" class="m-dot cb"/>
+<circle cx="102.2" cy="276.5" r="4.1" class="m-dot cb"/>
+<circle cx="113.7" cy="276.5" r="4.1" class="m-dot hom"/>
+<circle cx="125.2" cy="276.5" r="4.1" class="m-dot hom"/>
+<circle cx="136.7" cy="276.5" r="4.1" class="m-dot hom"/>
+<circle cx="148.2" cy="276.5" r="4.1" class="m-dot hom"/>
+<circle cx="159.7" cy="276.5" r="4.1" class="m-dot hom"/>
+<circle cx="171.2" cy="276.5" r="4.1" class="m-dot hom"/>
+<circle cx="182.7" cy="276.5" r="4.1" class="m-dot hom"/>
+<circle cx="194.2" cy="276.5" r="4.1" class="m-dot hom"/>
+<circle cx="205.7" cy="276.5" r="4.1" class="m-dot cx"/>
+<circle cx="217.2" cy="276.5" r="4.1" class="m-dot cx"/>
+<circle cx="228.7" cy="276.5" r="4.1" class="m-dot cx"/>
+<circle cx="240.2" cy="276.5" r="4.1" class="m-dot cx"/>
+<circle cx="251.7" cy="276.5" r="4.1" class="m-dot cx"/>
+<circle cx="263.2" cy="276.5" r="4.1" class="m-dot cx"/>
+<circle cx="274.7" cy="276.5" r="4.1" class="m-dot cx"/>
+<circle cx="286.2" cy="276.5" r="4.1" class="m-dot cx"/>
+<circle cx="297.7" cy="276.5" r="4.1" class="m-dot cx"/>
+<circle cx="309.2" cy="276.5" r="4.1" class="m-dot acc"/>
+<circle cx="320.7" cy="276.5" r="4.1" class="m-dot acc"/>
+<circle cx="332.2" cy="276.5" r="4.1" class="m-dot acc"/>
+<circle cx="62.0" cy="288.0" r="4.1" class="m-dot cb"/>
+<circle cx="73.5" cy="288.0" r="4.1" class="m-dot cb"/>
+<circle cx="85.0" cy="288.0" r="4.1" class="m-dot hom"/>
+<circle cx="96.5" cy="288.0" r="4.1" class="m-dot hom"/>
+<circle cx="108.0" cy="288.0" r="4.1" class="m-dot hom"/>
+<circle cx="119.5" cy="288.0" r="4.1" class="m-dot hom"/>
+<circle cx="131.0" cy="288.0" r="4.1" class="m-dot hom"/>
+<circle cx="142.5" cy="288.0" r="4.1" class="m-dot hom"/>
+<circle cx="154.0" cy="288.0" r="4.1" class="m-dot hom"/>
+<circle cx="165.5" cy="288.0" r="4.1" class="m-dot hom"/>
+<circle cx="177.0" cy="288.0" r="4.1" class="m-dot cx"/>
+<circle cx="188.5" cy="288.0" r="4.1" class="m-dot cx"/>
+<circle cx="200.0" cy="288.0" r="4.1" class="m-dot cx"/>
+<circle cx="211.5" cy="288.0" r="4.1" class="m-dot cx"/>
+<circle cx="223.0" cy="288.0" r="4.1" class="m-dot cx"/>
+<circle cx="234.5" cy="288.0" r="4.1" class="m-dot cx"/>
+<circle cx="246.0" cy="288.0" r="4.1" class="m-dot cx"/>
+<circle cx="257.5" cy="288.0" r="4.1" class="m-dot cx"/>
+<circle cx="269.0" cy="288.0" r="4.1" class="m-dot cx"/>
+<circle cx="280.5" cy="288.0" r="4.1" class="m-dot acc"/>
+<circle cx="292.0" cy="288.0" r="4.1" class="m-dot acc"/>
+<circle cx="303.5" cy="288.0" r="4.1" class="m-dot acc"/>
+<circle cx="315.0" cy="288.0" r="4.1" class="m-dot acc"/>
+<circle cx="326.5" cy="288.0" r="4.1" class="m-dot acc"/>
+<circle cx="67.7" cy="299.5" r="4.1" class="m-dot hom"/>
+<circle cx="79.2" cy="299.5" r="4.1" class="m-dot hom"/>
+<circle cx="90.7" cy="299.5" r="4.1" class="m-dot hom"/>
+<circle cx="102.2" cy="299.5" r="4.1" class="m-dot hom"/>
+<circle cx="113.7" cy="299.5" r="4.1" class="m-dot hom"/>
+<circle cx="125.2" cy="299.5" r="4.1" class="m-dot hom"/>
+<circle cx="136.7" cy="299.5" r="4.1" class="m-dot hom"/>
+<circle cx="148.2" cy="299.5" r="4.1" class="m-dot cx"/>
+<circle cx="159.7" cy="299.5" r="4.1" class="m-dot cx"/>
+<circle cx="171.2" cy="299.5" r="4.1" class="m-dot cx"/>
+<circle cx="182.7" cy="299.5" r="4.1" class="m-dot cx"/>
+<circle cx="194.2" cy="299.5" r="4.1" class="m-dot cx"/>
+<circle cx="205.7" cy="299.5" r="4.1" class="m-dot cx"/>
+<circle cx="217.2" cy="299.5" r="4.1" class="m-dot cx"/>
+<circle cx="228.7" cy="299.5" r="4.1" class="m-dot cx"/>
+<circle cx="240.2" cy="299.5" r="4.1" class="m-dot acc"/>
+<circle cx="251.7" cy="299.5" r="4.1" class="m-dot acc"/>
+<circle cx="263.2" cy="299.5" r="4.1" class="m-dot acc"/>
+<circle cx="274.7" cy="299.5" r="4.1" class="m-dot acc"/>
+<circle cx="286.2" cy="299.5" r="4.1" class="m-dot acc"/>
+<circle cx="297.7" cy="299.5" r="4.1" class="m-dot acc"/>
+<circle cx="309.2" cy="299.5" r="4.1" class="m-dot acc"/>
+<circle cx="320.7" cy="299.5" r="4.1" class="m-dot acc"/>
+<circle cx="332.2" cy="299.5" r="4.1" class="m-dot acc"/>
+<circle cx="62.0" cy="311.0" r="4.1" class="m-dot hom"/>
+<circle cx="73.5" cy="311.0" r="4.1" class="m-dot hom"/>
+<circle cx="85.0" cy="311.0" r="4.1" class="m-dot hom"/>
+<circle cx="96.5" cy="311.0" r="4.1" class="m-dot hom"/>
+<circle cx="108.0" cy="311.0" r="4.1" class="m-dot cx"/>
+<circle cx="119.5" cy="311.0" r="4.1" class="m-dot cx"/>
+<circle cx="131.0" cy="311.0" r="4.1" class="m-dot cx"/>
+<circle cx="142.5" cy="311.0" r="4.1" class="m-dot cx"/>
+<circle cx="154.0" cy="311.0" r="4.1" class="m-dot cx"/>
+<circle cx="165.5" cy="311.0" r="4.1" class="m-dot cx"/>
+<circle cx="177.0" cy="311.0" r="4.1" class="m-dot cx"/>
+<circle cx="188.5" cy="311.0" r="4.1" class="m-dot cx"/>
+<circle cx="200.0" cy="311.0" r="4.1" class="m-dot cx"/>
+<circle cx="211.5" cy="311.0" r="4.1" class="m-dot acc"/>
+<circle cx="223.0" cy="311.0" r="4.1" class="m-dot acc"/>
+<circle cx="234.5" cy="311.0" r="4.1" class="m-dot acc"/>
+<circle cx="246.0" cy="311.0" r="4.1" class="m-dot acc"/>
+<circle cx="257.5" cy="311.0" r="4.1" class="m-dot acc"/>
+<circle cx="269.0" cy="311.0" r="4.1" class="m-dot acc"/>
+<circle cx="280.5" cy="311.0" r="4.1" class="m-dot acc"/>
+<circle cx="292.0" cy="311.0" r="4.1" class="m-dot acc"/>
+<circle cx="303.5" cy="311.0" r="4.1" class="m-dot cb"/>
+<circle cx="315.0" cy="311.0" r="4.1" class="m-dot cb"/>
+<circle cx="326.5" cy="311.0" r="4.1" class="m-dot cb"/>
+<circle cx="67.7" cy="322.5" r="4.1" class="m-dot hom"/>
+<circle cx="79.2" cy="322.5" r="4.1" class="m-dot cx"/>
+<circle cx="90.7" cy="322.5" r="4.1" class="m-dot cx"/>
+<circle cx="102.2" cy="322.5" r="4.1" class="m-dot cx"/>
+<circle cx="113.7" cy="322.5" r="4.1" class="m-dot cx"/>
+<circle cx="125.2" cy="322.5" r="4.1" class="m-dot cx"/>
+<circle cx="136.7" cy="322.5" r="4.1" class="m-dot cx"/>
+<circle cx="148.2" cy="322.5" r="4.1" class="m-dot cx"/>
+<circle cx="159.7" cy="322.5" r="4.1" class="m-dot cx"/>
+<circle cx="171.2" cy="322.5" r="4.1" class="m-dot acc"/>
+<circle cx="182.7" cy="322.5" r="4.1" class="m-dot acc"/>
+<circle cx="194.2" cy="322.5" r="4.1" class="m-dot acc"/>
+<circle cx="205.7" cy="322.5" r="4.1" class="m-dot acc"/>
+<circle cx="217.2" cy="322.5" r="4.1" class="m-dot acc"/>
+<circle cx="228.7" cy="322.5" r="4.1" class="m-dot acc"/>
+<circle cx="240.2" cy="322.5" r="4.1" class="m-dot acc"/>
+<circle cx="251.7" cy="322.5" r="4.1" class="m-dot acc"/>
+<circle cx="263.2" cy="322.5" r="4.1" class="m-dot acc"/>
+<circle cx="274.7" cy="322.5" r="4.1" class="m-dot cb"/>
+<circle cx="286.2" cy="322.5" r="4.1" class="m-dot cb"/>
+<circle cx="297.7" cy="322.5" r="4.1" class="m-dot cb"/>
+<circle cx="309.2" cy="322.5" r="4.1" class="m-dot cb"/>
+<circle cx="320.7" cy="322.5" r="4.1" class="m-dot cb"/>
+<circle cx="332.2" cy="322.5" r="4.1" class="m-dot cb"/>
+<circle cx="62.0" cy="334.0" r="4.1" class="m-dot cx"/>
+<circle cx="73.5" cy="334.0" r="4.1" class="m-dot cx"/>
+<circle cx="85.0" cy="334.0" r="4.1" class="m-dot cx"/>
+<circle cx="96.5" cy="334.0" r="4.1" class="m-dot cx"/>
+<circle cx="108.0" cy="334.0" r="4.1" class="m-dot cx"/>
+<circle cx="119.5" cy="334.0" r="4.1" class="m-dot cx"/>
+<circle cx="131.0" cy="334.0" r="4.1" class="m-dot cx"/>
+<circle cx="142.5" cy="334.0" r="4.1" class="m-dot acc"/>
+<circle cx="154.0" cy="334.0" r="4.1" class="m-dot acc"/>
+<circle cx="165.5" cy="334.0" r="4.1" class="m-dot acc"/>
+<circle cx="177.0" cy="334.0" r="4.1" class="m-dot acc"/>
+<circle cx="188.5" cy="334.0" r="4.1" class="m-dot acc"/>
+<circle cx="200.0" cy="334.0" r="4.1" class="m-dot acc"/>
+<circle cx="211.5" cy="334.0" r="4.1" class="m-dot acc"/>
+<circle cx="223.0" cy="334.0" r="4.1" class="m-dot acc"/>
+<circle cx="234.5" cy="334.0" r="4.1" class="m-dot acc"/>
+<circle cx="246.0" cy="334.0" r="4.1" class="m-dot cb"/>
+<circle cx="257.5" cy="334.0" r="4.1" class="m-dot cb"/>
+<circle cx="269.0" cy="334.0" r="4.1" class="m-dot cb"/>
+<circle cx="280.5" cy="334.0" r="4.1" class="m-dot cb"/>
+<circle cx="292.0" cy="334.0" r="4.1" class="m-dot cb"/>
+<circle cx="303.5" cy="334.0" r="4.1" class="m-dot cb"/>
+<circle cx="315.0" cy="334.0" r="4.1" class="m-dot cb"/>
+<circle cx="326.5" cy="334.0" r="4.1" class="m-dot cb"/>
+</g>
+<path class="m-tissue outline" d="M72,264 C62,214 142,190 202,204 C282,216 320,264 292,306 C266,334 122,336 88,312 C74,300 76,282 72,264 Z"/>
+<circle cx="222" cy="246" r="9" class="m-ring"/>
+<circle cx="148" cy="286" r="9" class="m-ring"/>
+<text x="184.0" y="342.0" class="small" text-anchor="middle">Tissue spots, with amyloid-rich areas ringed</text>
+<text x="52.0" y="368.0" class="body">APOE is a major Alzheimer's risk axis</text>
+<text x="52.0" y="384.5" class="body">tied to astrocytes and microglia. The</text>
+<text x="52.0" y="401.0" class="body">enhancer RNA AANCR regulates APOE,</text>
+<text x="52.0" y="417.5" class="body">so the glial states it drives may sit</text>
+<text x="52.0" y="434.0" class="body">near amyloid pathology.</text>
+<rect x="48" y="446" width="272" height="38" rx="8" class="qbox"/>
+<circle cx="68" cy="465" r="10" class="qmark"/>
+<text x="68.0" y="470.0" class="qmark-t" text-anchor="middle">?</text>
+<text x="86.0" y="461.0" class="q">Are inflammatory glial states spatially</text>
+<text x="86.0" y="477.0" class="q">organized around amyloid?</text>
+<rect x="352" y="128" width="296" height="368" rx="12" class="panel"/><text x="368.0" y="154.0" class="eyebrow">DATA AND DESIGN</text><text x="368.0" y="176.0" class="h2">SEA-AD MERFISH, 3% sample</text>
+<rect x="368" y="192" width="128" height="66" rx="8" class="statbox"/>
+<text x="380.0" y="222.0" class="num">45,055</text>
+<text x="380.0" y="239.0" class="small">spots after QC</text>
+<rect x="504" y="192" width="128" height="66" rx="8" class="statbox"/>
+<text x="516.0" y="222.0" class="num">12</text>
+<text x="516.0" y="239.0" class="small">glial state signatures</text>
+<rect x="368" y="266" width="128" height="66" rx="8" class="statbox"/>
+<text x="380.0" y="296.0" class="num">180</text>
+<text x="380.0" y="313.0" class="small">MERFISH panel genes</text>
+<rect x="504" y="266" width="128" height="66" rx="8" class="statbox"/>
+<text x="516.0" y="296.0" class="num">1.89M</text>
+<text x="516.0" y="313.0" class="small">cells in full atlas</text>
+<text x="368.0" y="362.0" class="body">A fixed 3% sample of the SEA-AD middle</text>
+<text x="368.0" y="378.5" class="body">temporal gyrus, mapped with signatures</text>
+<text x="368.0" y="395.0" class="body">from 22,062 glial reference cells plus</text>
+<text x="368.0" y="411.5" class="body">an AANCR proxy from GSE263862.</text>
+<line x1="368" y1="446" x2="632" y2="446" class="rule"/>
+<text x="368.0" y="466.0" class="small">Reference stage: GPU (RTX 4060), 250 epochs</text>
+<text x="368.0" y="481.0" class="small">Spatial stage: CPU, 5,000 epochs</text>
+<rect x="668" y="128" width="296" height="368" rx="12" class="panel"/><text x="684.0" y="154.0" class="eyebrow">FINDINGS</text><text x="684.0" y="176.0" class="h2">A small, detectable signal</text>
+<text x="684.0" y="214.0" class="lab">Inflam_High spots</text>
+<text x="684.0" y="229.0" class="lab">(top 25%)</text>
+<rect x="848" y="192" width="100" height="50" rx="8" class="tile metric"/>
+<text x="898.0" y="218.0" class="tval" text-anchor="middle">11,264</text>
+<text x="898.0" y="232.0" class="tsub" text-anchor="middle">of 45,055</text>
+<text x="684.0" y="270.0" class="lab">Amyloid proximity</text>
+<text x="684.0" y="285.0" class="lab">(Mann-Whitney)</text>
+<rect x="848" y="248" width="100" height="50" rx="8" class="tile metric"/>
+<text x="898.0" y="274.0" class="tval" text-anchor="middle">p = 9.8e-5</text>
+<text x="898.0" y="288.0" class="tsub" text-anchor="middle">effect size 0.023</text>
+<text x="684.0" y="326.0" class="lab">Glia vs amyloid</text>
+<text x="684.0" y="341.0" class="lab">(Spearman)</text>
+<rect x="848" y="304" width="100" height="50" rx="8" class="tile metric"/>
+<text x="898.0" y="330.0" class="tval" text-anchor="middle">ρ = −0.013</text>
+<text x="898.0" y="344.0" class="tsub" text-anchor="middle">p = 5.1e-3</text>
+<text x="684.0" y="378.0" class="body">Effects are statistically detectable but</text>
+<text x="684.0" y="394.5" class="body">biologically modest, which makes this a</text>
+<text x="684.0" y="411.0" class="body">reproducible starting point for the full</text>
+<text x="684.0" y="427.5" class="body">1.89M-cell atlas.</text>
+<path class="chev" d="M339,298 l6,6 l-6,6"/>
+<path class="chev" d="M655,298 l6,6 l-6,6"/>
+<rect x="36" y="512" width="928" height="110" rx="12" class="panel"/>
+<text x="52.0" y="538.0" class="eyebrow">WORKFLOW</text>
+<text x="140.0" y="538.0" class="small">Python in WSL2 with CUDA passthrough: Scanpy, Cell2location (Pyro, PyTorch), Squidpy and SciPy</text>
+<line x1="111.7" y1="608" x2="888.3" y2="608" class="track"/>
+<circle cx="111.7" cy="608" r="4.5" class="packet"/>
+<rect x="52.0" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:0.0s"/>
+<text x="61.0" y="565.0" class="step-n">1</text>
+<text x="72.0" y="566.0" class="step-role">Sample</text>
+<text x="61.0" y="581.0" class="step-tool">SEA-AD h5ad</text>
+<text x="61.0" y="594.0" class="small">3%, fixed seed</text>
+<rect x="181.4" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:1.2s"/>
+<text x="190.4" y="565.0" class="step-n">2</text>
+<text x="201.4" y="566.0" class="step-role">QC</text>
+<text x="190.4" y="581.0" class="step-tool">Scanpy</text>
+<text x="190.4" y="594.0" class="small">45,055 cells</text>
+<rect x="310.9" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:2.4s"/>
+<text x="319.9" y="565.0" class="step-n">3</text>
+<text x="330.9" y="566.0" class="step-role">Cluster</text>
+<text x="319.9" y="581.0" class="step-tool">PCA · Leiden</text>
+<text x="319.9" y="594.0" class="small">resolution 0.6</text>
+<rect x="440.3" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:3.6s"/>
+<text x="449.3" y="565.0" class="step-n">4</text>
+<text x="460.3" y="566.0" class="step-role">Reference</text>
+<text x="449.3" y="581.0" class="step-tool">Cell2location</text>
+<text x="449.3" y="594.0" class="small">12 glial states</text>
+<rect x="569.7" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:4.8s"/>
+<text x="578.7" y="565.0" class="step-n">5</text>
+<text x="589.7" y="566.0" class="step-role">Map</text>
+<text x="578.7" y="581.0" class="step-tool">Cell2location</text>
+<text x="578.7" y="594.0" class="small">Pyro VI</text>
+<rect x="699.1" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:6.0s"/>
+<text x="708.1" y="565.0" class="step-n">6</text>
+<text x="719.1" y="566.0" class="step-role">Score</text>
+<text x="708.1" y="581.0" class="step-tool">reactive glia</text>
+<text x="708.1" y="594.0" class="small">75th percentile</text>
+<rect x="828.6" y="548" width="119.4" height="50" rx="8" class="chip" style="animation-delay:7.2s"/>
+<text x="837.6" y="565.0" class="step-n">7</text>
+<text x="848.6" y="566.0" class="step-role">Test</text>
+<text x="837.6" y="581.0" class="step-tool">Squidpy · SciPy</text>
+<text x="837.6" y="594.0" class="small">Spearman, MWU</text>
+<text x="36.0" y="650.0" class="eyebrow">TAKE-HOME</text>
+<text x="36.0" y="673.0" class="take">Cell2location maps <tspan class="em">12 glial states</tspan> across 45,055 MERFISH spots, and inflammation-high spots sit slightly</text>
+<text x="36.0" y="694.0" class="take">closer to amyloid (<tspan class="em">p = 9.8 × 10⁻⁵</tspan>): a modest but reproducible signal, ready to scale to the full atlas.</text>
+<text x="36.0" y="728.0" class="eyebrow">SKILLS</text>
+<rect x="100.0" y="712" width="96.1" height="24" rx="12" class="skill"/>
+<text x="148.1" y="728.0" class="chiptext" text-anchor="middle">Cell2location</text>
+<rect x="204.1" y="712" width="48.6" height="24" rx="12" class="skill"/>
+<text x="228.4" y="728.0" class="chiptext" text-anchor="middle">Pyro</text>
+<rect x="260.7" y="712" width="70.8" height="24" rx="12" class="skill"/>
+<text x="296.1" y="728.0" class="chiptext" text-anchor="middle">PyTorch</text>
+<rect x="339.4" y="712" width="64.3" height="24" rx="12" class="skill"/>
+<text x="371.6" y="728.0" class="chiptext" text-anchor="middle">Scanpy</text>
+<rect x="411.7" y="712" width="67.7" height="24" rx="12" class="skill"/>
+<text x="445.6" y="728.0" class="chiptext" text-anchor="middle">Squidpy</text>
+<rect x="487.5" y="712" width="79.0" height="24" rx="12" class="skill"/>
+<text x="527.0" y="728.0" class="chiptext" text-anchor="middle">MERFISH</text>
+<rect x="574.5" y="712" width="92.0" height="24" rx="12" class="skill"/>
+<text x="620.5" y="728.0" class="chiptext" text-anchor="middle">Bayesian VI</text>
+<rect x="674.5" y="712" width="56.4" height="24" rx="12" class="skill"/>
+<text x="702.7" y="728.0" class="chiptext" text-anchor="middle">SciPy</text>
+<rect x="738.9" y="712" width="57.1" height="24" rx="12" class="skill"/>
+<text x="767.4" y="728.0" class="chiptext" text-anchor="middle">CUDA</text>
+<rect x="804.0" y="712" width="62.0" height="24" rx="12" class="skill"/>
+<text x="835.0" y="728.0" class="chiptext" text-anchor="middle">Python</text>
+</svg>

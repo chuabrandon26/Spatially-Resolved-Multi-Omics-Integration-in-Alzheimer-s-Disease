@@ -1,13 +1,53 @@
-# Spatially-Resolved Multi-Omics Integration in Alzheimer's Disease
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/visual-abstract-dark.svg">
+  <img alt="Visual abstract: Cell2location maps 12 glial state signatures onto 45,055 SEA-AD MERFISH spots from the human middle temporal gyrus. Inflammation-high spots sit slightly closer to amyloid (Mann-Whitney p = 9.8e-5, rank-biserial 0.023), while the tissue-wide Spearman correlation between reactive glia and amyloid is negligible (rho = -0.013)." src="assets/visual-abstract-light.svg" width="100%">
+</picture>
+
+<h1 align="center">Spatially-Resolved Multi-Omics Integration in Alzheimer's Disease</h1>
+
+<p align="center">
+  Single-cell and spatial transcriptomics integrated with Cell2location to test whether APOE-linked reactive glia organize around amyloid pathology
+</p>
+
+<p align="center">
+  <img alt="spatial: SEA-AD MERFISH" src="https://img.shields.io/badge/spatial-SEA--AD%20MERFISH-4a3aa7">
+  <img alt="model: Cell2location" src="https://img.shields.io/badge/model-Cell2location-1f8f6a">
+  <img alt="PyTorch: Pyro VI" src="https://img.shields.io/badge/PyTorch-Pyro%20VI-EE4C2C?logo=pytorch&logoColor=white">
+  <img alt="Python: Scanpy · Squidpy" src="https://img.shields.io/badge/Python-Scanpy%20%C2%B7%20Squidpy-e09a00?logo=python&logoColor=white">
+  <img alt="GPU: CUDA via WSL2" src="https://img.shields.io/badge/GPU-CUDA%20via%20WSL2-76B900?logo=nvidia&logoColor=white">
+</p>
+
+<p align="center">
+  <a href="#overview">Overview</a> &nbsp;·&nbsp; <a href="#key-results">Key results</a> &nbsp;·&nbsp; <a href="#figures">Figures</a> &nbsp;·&nbsp; <a href="#pipeline-architecture">Pipeline</a> &nbsp;·&nbsp; <a href="#environment-setup">Environment</a> &nbsp;·&nbsp; <a href="#limitations">Limitations</a>
+</p>
+
+---
+
+## At a glance
+
+| **45,055** | **12** | **11,264** | **p = 9.8e-5** | **ρ = −0.013** |
+|:---:|:---:|:---:|:---:|:---:|
+| MERFISH spots after QC | glial state signatures | Inflam_High spots | amyloid proximity (Mann-Whitney) | glia vs amyloid (Spearman) |
+
+> **Take-home:** Cell2location maps 12 glial states across 45,055 MERFISH spots, and inflammation-high spots sit slightly closer to amyloid than inflammation-low spots. However, the effect is small and the tissue-wide correlation is negligible, so this run is best read as a reproducible framework with an initial signal, ready to scale to the full 1.89 million-cell atlas.
+
+## Skills demonstrated
+
+| Area | Evidence in this repository |
+|---|---|
+| **Spatial transcriptomics** | SEA-AD MERFISH processing, Squidpy neighborhood enrichment and nearest-neighbor proximity analysis |
+| **Probabilistic modeling** | Cell2location negative binomial reference regression and hierarchical Bayesian spatial mapping with Pyro variational inference |
+| **Single-cell analysis** | Scanpy quality control, normalization, PCA, UMAP and Leiden clustering, plus glial reference extraction |
+| **Multi-omics integration** | An APOE-linked AANCR proxy from bulk RNA-seq (GSE263862) combined with spatial data |
+| **Statistics** | Spearman correlation, Mann-Whitney U testing and rank-biserial effect sizes |
+| **HPC-style engineering** | GPU and CPU training, memory-safe sparse matrix sanitization and WSL2 with CUDA passthrough |
+
+## Overview
 
 > **Author:** Brandon Chua  
 > **Institution:** Heidelberg University  
 > **Date:** 24.05.2026  
 > **Status:** Completed (initial run on 3% sample)
-
----
-
-## Overview
 
 This project implements a computational pipeline to map astrocyte and microglia states to Alzheimer's amyloid pathology. Using `Cell2location`, it integrates single-cell and spatial transcriptomics to deconvolute the spatial distribution of glial cells, specifically those driven by the APOE-activating enhancer RNA AANCR, enabling detection of neuroinflammatory states across cortical tissue of the middle temporal gyrus (MTG).
 
@@ -33,11 +73,45 @@ The Spearman correlation is statistically significant but negligibly small and n
 
 ---
 
+## Figures
+
+All figures below were exported directly from the executed notebook outputs.
+
+![Cell2location posterior glial abundance across the middle temporal gyrus](assets/figures/spatial-reactive-glia-abundance.png)
+
+**Reactive glial abundance in tissue space.** The left panel shows the summed astrocyte and microglia posterior abundance (q05) at every MERFISH spot, while the right panel splits spots into Inflam_High (top 25%) and Inflam_Low.
+
+![Reactive glia, amyloid signal and combined spatial niches](assets/figures/spatial-niches.png)
+
+**Spatial niches.** Reactive glia abundance and the amyloid signal are combined into four niches (Inflam_High or Inflam_Low, crossed with Amyloid_High or Amyloid_Low) for neighborhood testing with Squidpy.
+
+<p>
+  <img src="assets/figures/neighborhood-enrichment.png" width="48%" alt="Squidpy neighborhood enrichment between spatial niches">
+  <img src="assets/figures/distance-to-amyloid.png" width="40%" alt="Nearest-neighbor distance to amyloid-high regions for Inflam_High and Inflam_Low spots">
+</p>
+
+**Neighborhood enrichment and amyloid proximity.** Squidpy z-scores show which niches neighbor each other more often than expected by chance, and the box plot compares nearest-neighbor distances to amyloid-high regions (Mann-Whitney p = 9.77e-05, rank-biserial 0.023).
+
+<details>
+<summary><b>Quality control, clustering and model training figures</b></summary>
+
+<br>
+
+![QC distributions before and after filtering](assets/figures/qc-distributions.png)
+
+![UMAP with Leiden clusters, APOE and AANCR expression](assets/figures/umap-leiden-clusters.png)
+
+![Cell2location reference model training](assets/figures/cell2location-reference-training.png)
+
+</details>
+
+---
+
 ## Biological Background
 
 A central question in Alzheimer's disease biology is whether glial inflammatory states are spatially organized around pathology. APOE is a major genetic and molecular risk axis in Alzheimer's disease and is strongly connected to astrocyte and microglial biology. AANCR is treated here as an APOE-linked regulatory signal.
 
-Because AANCR may not be directly measured in the targeted MERFISH panel, the notebook uses GSE263862 to infer an AANCR-like proxy from APOE-correlated noncoding RNA behavior when direct AANCR measurement is unavailable.
+AANCR may not be directly measured in the targeted MERFISH panel, so the notebook uses GSE263862 to infer an AANCR-like proxy from APOE-correlated noncoding RNA behavior when direct AANCR measurement is unavailable.
 
 ---
 
@@ -321,7 +395,6 @@ The reference regression model was trained on GPU. The spatial mapping model was
 1. Run the full pipeline on the **complete SEA-AD MERFISH object** using HPC resources.
 2. Replace the proxy with a **direct AANCR measurement** if available.
 3. Perform **sensitivity analyses** across QC thresholds, abundance cutoffs, and donor subsets.
-4. Add exported figure files to the repository so the README can display the main visual outputs directly.
 
 ---
 
